@@ -197,3 +197,6 @@ It's a little tricky to test background threads in a unit test context. I went t
 
 So, we've got a few tests in `main_spec.rb` and then a bunch in `main_activity.rb` which are run simply by running the app in this codebase via `rake`. I'm not especially proud of this, but figured it was better than nothing. If anyone can show me a better way, I'd love to see it.
 
+## Credits
+
+Many, many thanks to [Todd Werth](https://github.com/twerth) and [Jamon Holmgren](https://github.com/jamonholmgren) for helping to define the API. This is a much better gem than it would have been without their input.
