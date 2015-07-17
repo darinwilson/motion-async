@@ -80,6 +80,21 @@ class MainActivity < Android::App::Activity
         pass_test
       end
     end
+
+    test "invoking with #after delays execution" do
+      start_time = Time.now
+      MotionAsync.after(2.0) do
+        #no-op
+      end.on(:completion) do
+        diff = Time.now - start_time
+        if diff >= 2.0 && diff <= 3.0
+          pass_test
+        else
+          fail_test "Code invoked with #after executed in #{diff} seconds (expected ~2)"
+        end
+      end
+    end
+
   end
 
   def test(name, &block)
@@ -112,7 +127,7 @@ class MainActivity < Android::App::Activity
 
   def fail_test(message=nil)
     message = message.nil? ? "" : ": (#{message})"
-    puts "  -> FAILED#{msg}"
+    puts "  -> FAILED#{message}"
   end
 
 end

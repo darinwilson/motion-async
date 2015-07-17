@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    motion-async (0.1)
+    motion-async (0.5)
 
 GEM
   remote: https://rubygems.org/

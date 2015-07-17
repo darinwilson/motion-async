@@ -1,10 +1,12 @@
 class MotionAsyncTask < Android::Os::AsyncTask
   attr_reader :result
+  attr_accessor :delay
 
   # Java is super picky about constructors, so we'll use a factory method
   def self.create(options={}, &block)
     MotionAsyncTask.new.tap do |task|
       options[:background] = block if block
+      task.delay = options.delete(:delay)
       task.callbacks.merge!(options)
     end
   end
@@ -52,6 +54,7 @@ class MotionAsyncTask < Android::Os::AsyncTask
   end
 
   def doInBackground(params)
+    sleep self.delay if self.delay
     @result = call_if_defined :background, self
   end
 

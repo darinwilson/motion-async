@@ -189,6 +189,18 @@ task.running?
 task.finished?
 ```
 
+### Delaying Execution
+
+The `after` method works just like `async`, but takes a float as its first parameter to specify the number of seconds to delay before executing the async block:
+
+```ruby
+after(2) do
+  p "This won't happen for another 2 seconds"
+end
+```
+
+This works fine for relatively short delays (a few seconds at most), but you'd probably want to use a [Handler](https://developer.android.com/reference/android/os/Handler.html) for anything longer.
+
 ## Development
 
 ### Tests

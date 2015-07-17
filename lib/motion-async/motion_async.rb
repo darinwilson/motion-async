@@ -87,6 +87,18 @@
 #   @async_task.cancel
 # end
 #
+# Delaying execution
+#
+# The #after method works just like #async, but takes a float as its first parameter to
+# specify the number of seconds to delay before executing the async block.
+#
+# after(2) do
+#   p "We did this 2 seconds later"
+# end
+#
+# This works fine for relatively short delays (a few seconds at most), but you'd probably want to use a
+# Handler for anything longer.
+#
 module MotionAsync
 
   def self.async(options={}, &block)
@@ -95,8 +107,16 @@ module MotionAsync
     end
   end
 
+  def self.after(delay, options={}, &block)
+    MotionAsync.async(options.merge(delay: delay), &block)
+  end
+
   def async(options={}, &block)
     MotionAsync.async(options, &block)
+  end
+
+  def after(delay, options={}, &block)
+    MotionAsync.after(delay, options, &block)
   end
 
 end
